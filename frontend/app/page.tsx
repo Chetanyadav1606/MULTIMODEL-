@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import Link from "next/link"
 import {
   Brain,
   TrendingUp,
@@ -125,45 +126,66 @@ const handleAnalyze = () => {
 
   return (
     <div className="min-h-screen bg-background particle-bg overflow-hidden">
-      <motion.nav
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="fixed top-0 w-full z-50 glassmorphism border-b border-white/10"
+     import Link from "next/link";
+
+<motion.nav
+  initial={{ y: -100, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  className="fixed top-0 w-full z-50 glassmorphism border-b border-white/10"
+>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="flex justify-between items-center h-16">
+      <motion.div
+        className="flex items-center space-x-3"
+        whileHover={{ scale: 1.05 }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <motion.div className="flex items-center space-x-3" whileHover={{ scale: 1.05 }}>
-              <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-lime-500 rounded-xl flex items-center justify-center glow-effect">
-                <Brain className="w-6 h-6 text-white" />
-              </div>
-              <span className="text-xl font-bold neon-glow">AI Nexus</span>
-            </motion.div>
-            <div className="flex items-center space-x-6">
-              {["Dashboard", "Agents", "Analytics", "Settings"].map((item, index) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
-                  >
-                    {item}
-                  </Button>
-                </motion.div>
-              ))}
-              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                <Avatar className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 glow-effect">
-                  <AvatarFallback className="bg-transparent text-white font-semibold">AI</AvatarFallback>
-                </Avatar>
-              </motion.div>
-            </div>
-          </div>
+        <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-lime-500 rounded-xl flex items-center justify-center glow-effect">
+          <Brain className="w-6 h-6 text-white" />
         </div>
-      </motion.nav>
+        <span className="text-xl font-bold neon-glow">AI Nexus</span>
+      </motion.div>
+
+      <div className="flex items-center space-x-6">
+        {["Dashboard", "Agents", "Pricing", "Agentix"].map((item, index) => {
+          const href =
+            item === "Dashboard"
+              ? "/"
+              : item === "Agentix"
+              ? "/agentix"
+              : `/${item.toLowerCase()}`;
+
+          return (
+            <motion.div
+              key={item}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+            >
+              <Link href={href}>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
+                >
+                  {item}
+                </Button>
+              </Link>
+            </motion.div>
+          );
+        })}
+
+        <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+          <Avatar className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 glow-effect">
+            <AvatarFallback className="bg-transparent text-white font-semibold">
+              AI
+            </AvatarFallback>
+          </Avatar>
+        </motion.div>
+      </div>
+    </div>
+  </div>
+</motion.nav>
+
 
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
         <motion.div className="absolute inset-0 opacity-30" style={{ y }}>
