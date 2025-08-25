@@ -1,0 +1,6 @@
+streamlit
+langchain
+langgraph
+google-generativeai
+beautifulsoup4
+requests
